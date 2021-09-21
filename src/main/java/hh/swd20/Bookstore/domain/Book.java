@@ -70,6 +70,12 @@ public class Book {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", isbn=" + isbn + ", year=" + year
+				+ ", price=" + price + "]";
+	}
 	
 
 	
