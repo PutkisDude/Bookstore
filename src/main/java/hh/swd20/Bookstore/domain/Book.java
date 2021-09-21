@@ -22,6 +22,13 @@ public class Book {
 		this.year = year;
 		this.price = price;
 	}
+	public Book() {
+		this.title = null;
+		this.author = null;
+		this.isbn = null;
+		this.year = 0;
+		this.price = 0;
+	}
 
 	public long getId() {
 		return id;
