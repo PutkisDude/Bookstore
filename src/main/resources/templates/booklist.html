@@ -1,33 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Bookstore - List</title>
-<style> 
-table, th, td{
-border:1px solid black;
-border-collapse: collapse;
-padding: 0 10px}
-</style>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Bookstore - List</title>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.1.0/css/bootstrap.min.css} "/> 
+ <!--  <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />  -->
 </head>
 <body>
 
-	<table>
+	<table class="table table-striped">
 		<tr>
 			<th>Author</th>
 			<th>Title</th>
 			<th>ISBN</th>
 			<th>Year</th>
+			<th>(Delete)</th>
+			<th>(Edit)</th>
 		</tr>
 			<tr th:each = "book : ${books}">
 			<td th:text="${book.author}"></td>
 			<td th:text="${book.title}"></td>
 			<td th:text="${book.isbn}"></td>
 			<td th:text="${book.year}"></td>
-			<td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
-			<td><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a>
+			<td><a th:href="@{/delete/{id}(id=${book.id})}"><Button class="btn btn-danger">Delete</Button></a></td>
+			<td><a th:href="@{/edit/{id}(id=${book.id})}"><button class="btn btn-warning">Edit</button></a>
 		</tr>
 	</table>
-	<a href="./addbook">Add Book</a>
+	<a href="./addbook"><button class="btn btn-success">Add a book</button></a>
 </body>
 </html>
