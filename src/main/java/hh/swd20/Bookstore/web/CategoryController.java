@@ -21,11 +21,6 @@ public class CategoryController {
 		model.addAttribute("categories", catRepository.findAll());
 		return "categorylist";
 	}
-	@GetMapping("/deletecategory/{id}")
-	public String deleteCategory(@PathVariable("id") Long catId, Model model) {
-		catRepository.deleteById(catId);
-		return "redirect:../categorylist";
-	}
 	
 	@GetMapping("/addcategory")
 	public String addCategory(Model model) {
