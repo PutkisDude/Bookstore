@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Bookstore - Rename Category</title>
+<style>
+form {
+	display:flex;
+	flex-direction:row;
+}
+label, input{
+	display:block;
+}
+</style>
+</head>
+<body>
+	<form th:object="${category}" th:action="@{../savecat}" action="#" method="post">
+		<fieldset>
+		<legend>Rename the category</legend>
+		<label for="id"></label>
+		<input type="hidden" id="id" th:field="*{id}" readonly="readonly" />
+		<label for="name">Name</label>
+	 	<input type="text" id="name" th:field="*{name}" />
+	 	<input type="submit" value="Rename" />
+		</fieldset>	
+	
+	</form>
+</body>
+</html>

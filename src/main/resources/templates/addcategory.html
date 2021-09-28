@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Bookstore - Add Category</title>
+<style>
+form {
+	display:flex;
+	flex-direction:row;
+}
+label, input{
+	display:block;
+}
+</style>
+</head>
+<body>
+	<form th:object="${category}" th:action="@{/savecat}" action="#" method="post">
+		<fieldset>
+		<legend>Add a category</legend>
+		<label for="name">Name</label>
+	 	<input type="text" id="name" th:field="*{name}" />
+	 	<input type="submit" value="Add a category" />
+		</fieldset>	
+	
+	</form>
+</body>
+</html>
