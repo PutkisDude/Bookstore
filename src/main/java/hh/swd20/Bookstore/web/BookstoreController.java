@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import hh.swd20.Bookstore.domain.Book;
 import hh.swd20.Bookstore.domain.BookRepository;
+import hh.swd20.Bookstore.domain.CategoryRepository;
 
 
 @Controller
@@ -15,6 +16,8 @@ public class BookstoreController {
 
 	@Autowired
 	private BookRepository repository;
+	@Autowired
+	private CategoryRepository categoryRepository;
 	
 	@GetMapping("")
 	public String index(Model model) {
@@ -36,12 +39,14 @@ public class BookstoreController {
 	@GetMapping("/addbook")
 	public String addBook(Model model) {
 		model.addAttribute("book", new Book());
+		model.addAttribute("categories", categoryRepository.findAll());
 		return "addbook";
 	}
 	
 	@GetMapping("/edit/{id}")
 	public String editBook(@PathVariable("id") Long bookId, Model model) {
 		model.addAttribute("book", repository.findById(bookId).get());
+		model.addAttribute("categories", categoryRepository.findAll());
 		return "editbook";
 	}
 	
