@@ -24,7 +24,7 @@ public class BookstoreApplication {
 
 	
 	@Bean
-	public CommandLineRunner demo(BookRepository bookRepository, CategoryRepository catRepository) {
+	public CommandLineRunner demo(CategoryRepository catRepository, BookRepository bookRepository) {
 		return (args) -> {
 			
 			
@@ -36,6 +36,13 @@ public class BookstoreApplication {
 			catRepository.save(selfhelp);
 			catRepository.save(biography);
 			
+			
+			log.info("Fetch all the categories");
+			for(Category category : catRepository.findAll()) {
+				log.info(category.toString());
+			}
+			
+			
 			Book hobbit = new Book("The Hobbit", "J.R.R Tolkien", "", 1937, 29.99, fantasy);
 			Book happiness = new Book("The Art of Happiness", "Dalai Lama XIV, Howard C. Butler", "", 1998, 39.99, selfhelp);
 			Book lemmy = new Book("Lemmy White Line Fever", "Janis Garza, Lemmy Kilmister", "", 2003, 15.95, biography);
@@ -43,14 +50,7 @@ public class BookstoreApplication {
 			bookRepository.save(hobbit);
 			bookRepository.save(happiness);
 			bookRepository.save(lemmy);
-			
 
-			
-			log.info("Fetch all the categories");
-			for(Category category : catRepository.findAll()) {
-				log.info(category.toString());
-			}
-			
 			log.info("Fetch all the books");
 			for(Book books : bookRepository.findAll()) {
 				log.info(books.toString());
