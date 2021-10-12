@@ -3,19 +3,36 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 	<head>
 	<title>BookStore - Login</title>
-	<link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.1.0/css/bootstrap.min.css} "/> 
-	</head>	
+	 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+	 </head>	
 	<body>
-	<div class="alert alert-danger" th:if="${param.error}">
-	Invalid username and password.
-    </div>
-    <div class="alert alert-warning" th:if="${param.logout}">
-    You have been logged out.
-   </div>
-        <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
-        </form>	
+	
+	<div class="container">
+	<div class="row" style="padding-top:5px">
+		<div class="col-md-5 mx-auto">  
+			<div class="alert alert-danger" th:if="${param.error}">
+				Invalid username and/or password.
+    		</div>
+    		<div class="alert alert-warning" th:if="${param.logout}">
+    			You have been logged out.
+  			</div>
+  		</div>
+  	</div>
+	 
+	 <div class="row">	   
+     	<div class="col-md-5 mx-auto">  
+        		<div class="card card-body">  
+     			<form th:action="@{/login}" method="post">
+             		<label for="username">Username</label>  
+            		<input type="text" class="form-control text-lowercase" name="username" />  
+					<label class="d-flex flex-row align-items-center" for="password"> Password</label>
+					<input type="password" class="form-control" name="password" />  
+      				<button class="btn btn-primary btn-block" type="submit"> Log In </button>  
+               </form>  
+          		</div>
+     		</div>
+   		</div>
+
+   	</div>
 	</body>
 </html>
