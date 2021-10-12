@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Bookstore - List</title>
@@ -7,7 +7,22 @@
  <!--  <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />  -->
 </head>
 <body>
-
+	<div class="container">
+		<div class="row">
+			<div class="col-8">
+				<h1>The BookStore</h1>
+			</div>
+			
+			
+			<div class="col col-2" >
+				<h3 th:inline="text" style="color:red">[[${#httpServletRequest.remoteUser}]]</h3>
+			</div>
+		
+			<div class="col col-2">
+				<form th:action="@{/logout}" method="POST"> 
+				<input class="btn btn-danger" type="submit" value="Logout"/></form>
+			</div>
+		</div>
 	<table class="table table-striped">
 		<tr>
 			<th>Author</th>
@@ -15,8 +30,8 @@
 			<th>ISBN</th>
 			<th>Year</th>
 			<th>Category</th>
-			<th>(Delete)</th>
-			<th>(Edit)</th>
+			<th sec:authorize="hasRole('ADMIN')">(Delete)</th>
+			<th sec:authorize="hasRole('ADMIN')">(Edit)</th>
 		</tr>
 			<tr th:each = "book : ${books}">
 			<td th:text="${book.author}"></td>
@@ -24,10 +39,12 @@
 			<td th:text="${book.isbn}"></td>
 			<td th:text="${book.year}"></td>
 			<td th:text="${book.category.name}"></td>
-			<td><a th:href="@{/delete/{id}(id=${book.id})}"><Button class="btn btn-danger">Delete</Button></a></td>
-			<td><a th:href="@{/edit/{id}(id=${book.id})}"><button class="btn btn-warning">Edit</button></a>
+			<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}"><Button class="btn btn-danger">Delete</Button></a></td>
+			<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/edit/{id}(id=${book.id})}"><button class="btn btn-warning">Edit</button></a>
 		</tr>
 	</table>
 	<a href="./addbook"><button class="btn btn-success">Add a book</button></a>
+	<a sec:authorize="hasRole('ADMIN')" href="/categorylist"><button class="btn btn-success">Categories</button></a>
+	</div>
 </body>
 </html>
