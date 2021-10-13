@@ -30,8 +30,8 @@
 			<th>ISBN</th>
 			<th>Year</th>
 			<th>Category</th>
-			<th sec:authorize="hasRole('ADMIN')">(Delete)</th>
-			<th sec:authorize="hasRole('ADMIN')">(Edit)</th>
+			<th sec:authorize="hasAuthority('ADMIN')">(Delete)</th>
+			<th sec:authorize="hasAuthority('ADMIN')">(Edit)</th>
 		</tr>
 			<tr th:each = "book : ${books}">
 			<td th:text="${book.author}"></td>
@@ -39,12 +39,12 @@
 			<td th:text="${book.isbn}"></td>
 			<td th:text="${book.year}"></td>
 			<td th:text="${book.category.name}"></td>
-			<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}"><Button class="btn btn-danger">Delete</Button></a></td>
-			<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/edit/{id}(id=${book.id})}"><button class="btn btn-warning">Edit</button></a>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}"><Button class="btn btn-danger">Delete</Button></a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${book.id})}"><button class="btn btn-warning">Edit</button></a>
 		</tr>
 	</table>
 	<a href="./addbook"><button class="btn btn-success">Add a book</button></a>
-	<a sec:authorize="hasRole('ADMIN')" href="/categorylist"><button class="btn btn-light">Categories</button></a>
+	<a sec:authorize="hasAuthority('ADMIN')" href="/categorylist"><button class="btn btn-light">Categories</button></a>
 	</div>
 </body>
 </html>

@@ -3,6 +3,7 @@ package hh.swd20.Bookstore;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,6 +13,8 @@ import hh.swd20.Bookstore.domain.Book;
 import hh.swd20.Bookstore.domain.BookRepository;
 import hh.swd20.Bookstore.domain.Category;
 import hh.swd20.Bookstore.domain.CategoryRepository;
+import hh.swd20.Bookstore.domain.User;
+import hh.swd20.Bookstore.domain.UserRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -24,7 +27,7 @@ public class BookstoreApplication {
 
 	
 	@Bean
-	public CommandLineRunner demo(CategoryRepository catRepository, BookRepository bookRepository) {
+	public CommandLineRunner demo(CategoryRepository catRepository, BookRepository bookRepository, UserRepository userRepository) {
 		return (args) -> {
 			
 			
@@ -55,7 +58,11 @@ public class BookstoreApplication {
 			for(Book books : bookRepository.findAll()) {
 				log.info(books.toString());
 			}
-
+			
+			User user1 = new User("user", "$2a$10$hRW.BVwBW1Brkg6FgnehUub9Llc5n7rH8l66M3oFqtcSv/t294eWm", "user@ubookstore.hh", "USER");
+			User user2 = new User("admin", "$2a$10$VYZ346JMkPnalp31FbPr/unKzE3q2a8QlLu/dzVi.5LejAVe2MnRm", "admin@bookstore.hh", "ADMIN");			
+			userRepository.save(user1);
+			userRepository.save(user2);
 		};
 	}
 }
