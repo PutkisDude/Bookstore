@@ -27,9 +27,9 @@ public class BookstoreController {
 	private BookRepository repository;
 
 	
-	@GetMapping("")
+	@GetMapping("*")
 	public String index(Model model) {
-		return "index";
+		return "redirect:booklist";
 	}
 	
 	
@@ -56,6 +56,7 @@ public class BookstoreController {
 		return "redirect:../booklist";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	@GetMapping("/addbook")
 	public String addBook(Model model) {
 		model.addAttribute("book", new Book());

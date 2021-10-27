@@ -4,23 +4,22 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Bookstore - List</title>
     <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.1.0/css/bootstrap.min.css} "/> 
- <!--  <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />  -->
 </head>
 <body>
 	<div class="container">
 		<div class="row">
 			<div class="col-8">
 				<h1>The BookStore</h1>
-			</div>
-			
-			
-			<div class="col col-2" >
+			</div>				
+			<div sec:authorize="isAuthenticated()" class="col col-2" >
 				<h3 th:inline="text" style="color:red">[[${#httpServletRequest.remoteUser}]]</h3>
-			</div>
-		
-			<div class="col col-2">
+			</div>			
+			<div sec:authorize="isAuthenticated()" class="col col-2">
 				<form th:action="@{/logout}" method="POST"> 
 				<input class="btn btn-danger" type="submit" value="Logout"/></form>
+			</div>
+			<div sec:authorize="!(isAuthenticated())" class="row" style="padding-bottom:5px">
+			<a href="./login"><button class="btn btn-dark">Login</button></a>
 			</div>
 		</div>
 	<table class="table table-striped">
@@ -43,7 +42,7 @@
 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${book.id})}"><button class="btn btn-warning">Edit</button></a>
 		</tr>
 	</table>
-	<a href="./addbook"><button class="btn btn-success">Add a book</button></a>
+	<a sec:authorize="hasAuthority('ADMIN') or hasAuthority('USER')" href="./addbook"><button class="btn btn-success">Add a book</button></a>
 	<a sec:authorize="hasAuthority('ADMIN')" href="/categorylist"><button class="btn btn-light">Categories</button></a>
 	</div>
 </body>
